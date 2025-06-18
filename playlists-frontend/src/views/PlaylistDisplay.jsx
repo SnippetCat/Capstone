@@ -1,22 +1,34 @@
 import { useSelector } from "react-redux";
-
-import Playlist from "../components/Playlist";
 import PlaylistForm from "./PlaylistForm";
-import Section from "../components/Section";
-
 
 const PlaylistDisplay = () => {
-    const loggedUser = useSelector((state) => state.loggedUser);
     const playlists = useSelector((state) => state.playlists);
 
     return (
-        <div>
-            <h3>Playlists</h3>
-            {playlists.map((playlist) => (
-                <Playlist key={playlist.id} playlist={playlist} />
-            ))}
+        <div className="container mt-4">
+            <h4 className="mb-3">Playlists</h4>
+            <table className="table table-striped table-bordered">
+                <thead className="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Creator</th>
+                        <th># Songs</th>
+                        <th>Likes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {playlists.map((playlist) => (
+                        <tr key={playlist.id}>
+                            <td>{playlist.name}</td>
+                            <td>{playlist.creator}</td>
+                            <td>{playlist.numOfSongs}</td>
+                            <td>{playlist.likes}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
-}
+};
 
 export default PlaylistDisplay;

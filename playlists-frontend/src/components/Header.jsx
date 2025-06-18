@@ -1,40 +1,41 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import LogoutField from "./LogoutField";
 import { useSelector } from "react-redux";
 
-
 const Header = () => {
-    const navigate = useNavigate();
-
     const loggedUser = useSelector((state) => state.loggedUser);
-
-    const menuStyle = {
-        display: "flex",
-        gap: "10px",
-    }
-
     return (
-        <div>
-            <h1>Playlists Application</h1>
-            <div style={menuStyle}>
-                <Link to="/">Home</Link>
-                <Link to="/about">About</Link>
-                {!loggedUser ?
-                    (<div>
-                        <Link to="/login">Login</Link>
-                    </div>)
-                    : (<div style={menuStyle}>
-                        <Link to="/users">Users</Link>
-                        <Link to="/playlists">Playlists</Link>
-                        <Link to="/addPlaylists">Add Playlists</Link>
-                        <LogoutField />
-                    </div>)
-                }
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div className="container-fluid">
+                <Link className="navbar-brand" to="/">Playlists App</Link>
+                <div className="collapse navbar-collapse">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/about">About</Link>
+                        </li>
+                        {loggedUser && (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/users">Users</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/playlists">Playlists</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/addPlaylists">Add Playlists</Link>
+                                </li>
+                            </>
+                        )}
+                    </ul>
+                    {loggedUser && <LogoutField />}
+                    {!loggedUser && <Link className="btn btn-outline-light ms-2" to="/login">Login</Link>}
+                </div>
             </div>
-
-        </div>
-    )
+        </nav>
+    );
 }
 
 export default Header;

@@ -32,22 +32,28 @@ const PlaylistForm = () => {
     }
 
     return (
-        <div>
-            <h3>Add Playlists</h3>
-            <form onSubmit={handleAddition}>
-                <div> Playlist Name: {""}
-                    <input type="text" name="name" />
+        <div className="container mt-4" style={{ maxWidth: 500 }}>
+            <form onSubmit={handleAddition} className="card p-4 shadow-sm">
+                <h3 className="mb-3 text-center">Add Playlist</h3>
+                <div className="mb-3">
+                    <label className="form-label">Playlist Name</label>
+                    <input type="text" name="name" className="form-control" />
                 </div>
-                <div> Creator: {""}
-                    <input type="text" name="creator" />
+                <div className="mb-3">
+                    <label className="form-label">Creator</label>
+                    <input type="text" name="creator" className="form-control" />
                 </div>
-                <div> Number of Songs: {""}
-                    <input type="text" name="noSongs" />
+                <div className="mb-3">
+                    <label className="form-label">Number of Songs</label>
+                    <input type="number" name="noSongs" className="form-control" />
                 </div>
-                <div> Likes: {""}
-                    <input type="text" name="likes" />
+                <div className="mb-3">
+                    <label className="form-label">Likes</label>
+                    <input type="number" name="likes" className="form-control" />
                 </div>
-                <button>Add Playlist</button>
+                <div className="d-grid">
+                    <button className="btn btn-success">Add Playlist</button>
+                </div>
             </form>
         </div>
     )

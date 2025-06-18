@@ -1,9 +1,12 @@
 import Section from "./Section"
+
 const Footer = () => {
     return (
-        <Section>
-            <b>By Nikhil Palempalle. Created June 18, 2025</b>
-        </Section>
+        <footer className="bg-dark text-light text-center py-3 mt-5">
+            <p>
+                Your songs, your playlists. Share your music here! <b>TechnoStudy</b>
+            </p>
+        </footer>
     )
 }
 
