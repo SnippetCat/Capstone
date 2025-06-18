@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import loginService from "../services/loginService";
 
+import { setNotification, setNotificationStore } from "./notificationReducer";
+
 const loggedUserSlice = createSlice({
     name: "loggedUserSlice",
     initialState: null,
@@ -19,9 +21,17 @@ export const setUserStore = (userToken) => {
 
 export const loginUserDBStore = (userCredentials) => {
     return async (dispatch) => {
-        const loggedUser = await loginService.login(userCredentials);
-        dispatch(setLoggedUser(loggedUser));
-        localStorage.setItem("userCredentials", JSON.stringify(loggedUser))
+        try {
+            const loggedUser = await loginService.login(userCredentials);
+            dispatch(setLoggedUser(loggedUser));
+            localStorage.setItem("userCredentials", JSON.stringify(loggedUser))
+            dispatch(setNotificationStore({ type: "info", message: "Login successful!" }))
+        } catch (error) {
+            dispatch(setNotificationStore({ type: "warning", message: "Login failed!" }));
+        }
+        setTimeout(() => {
+            dispatch(setNotificationStore(null));
+        }, 3000);
     }
 }
 

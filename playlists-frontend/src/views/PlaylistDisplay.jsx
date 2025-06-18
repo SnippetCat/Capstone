@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 
-import Playlist from "./Playlist";
+import Playlist from "../components/Playlist";
 import PlaylistForm from "./PlaylistForm";
-import Section from "./Section";
+import Section from "../components/Section";
 
 
 const PlaylistDisplay = () => {
@@ -15,7 +15,6 @@ const PlaylistDisplay = () => {
             {playlists.map((playlist) => (
                 <Playlist key={playlist.id} playlist={playlist} />
             ))}
-            <PlaylistForm />
         </div>
     );
 }

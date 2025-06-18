@@ -1,30 +1,26 @@
 import { useDispatch } from "react-redux";
 import { setLoggedUser, loginUserDBStore } from "../reducers/loggedUserReducer";
 import { setNotification, setNotificationStore } from "../reducers/notificationReducer";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
 
-    try {
-      const loggedUser = {
-        username: event.target.username.value,
-        password: event.target.password.value
-      };
 
-      dispatch(loginUserDBStore(loggedUser));
+    const loggedUser = {
+      username: event.target.username.value,
+      password: event.target.password.value
+    };
 
-      event.target.username.value = "";
-      event.target.password.value = "";
-      dispatch(setNotificationStore({ type: "info", message: "Login successful!" }))
-    } catch (error) {
-      dispatch(setNotificationStore({ type: "warning", message: "Login failed!" }));
-    }
-    setTimeout(() => {
-      dispatch(setNotificationStore(null));
-    }, 3000);
+    dispatch(loginUserDBStore(loggedUser));
+
+    event.target.username.value = "";
+    event.target.password.value = "";
+    navigate("/");
   }
   return (
     <form onSubmit={handleLogin}>

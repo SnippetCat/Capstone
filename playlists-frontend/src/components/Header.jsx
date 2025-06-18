@@ -20,8 +20,17 @@ const Header = () => {
             <div style={menuStyle}>
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
-                <Link to="/users">Users</Link>
-                <LogoutField />
+                {!loggedUser ?
+                    (<div>
+                        <Link to="/login">Login</Link>
+                    </div>)
+                    : (<div style={menuStyle}>
+                        <Link to="/users">Users</Link>
+                        <Link to="/playlists">Playlists</Link>
+                        <Link to="/addPlaylists">Add Playlists</Link>
+                        <LogoutField />
+                    </div>)
+                }
             </div>
 
         </div>
